@@ -1,14 +1,14 @@
-import { useState, useContext } from 'react';
-import { useNavigate as navigate } from 'react-router-dom';
-import { UserContext } from '../../App.js';
+import { useState } from 'react';
+import { useNavigate  } from 'react-router-dom';
 
 import './login.css';
-
+import { useAuth } from '../../store/auth.js';
+ 
 export default function LogIn() {
 
-    const api = process.env.BACK_URL;
-
-    const { disatch } = useContext(UserContext);
+    // const api = process.env.BACK_URL;
+    const navigate = useNavigate();
+    const {storeTokenInLS} = useAuth();
 
     const [ user, setUser ] = useState({
         email: "",
@@ -29,27 +29,36 @@ export default function LogIn() {
 
     const loginUser = async (e) => {
 
-        e.preventDefault();
+        const url = "http://localhost:4000";
+        try {
+            e.preventDefault();
 
-        const res = await fetch(`${api}/api/login`,{
-            method:'POST',
-            headers: {
-                "Accept" : "application/json",
-                "Content-Type" : "application/json"
-            },
-            body: JSON.stringify(user)
-        });
+            const res = await fetch( url + '/api/login',{
+                method:'POST',
+                headers: {
+                    "Content-Type" : "application/json",
+                },
+                body: JSON.stringify(user)
+            });
 
-        const data = await res.json();
+            if(res.ok) {
+                const data = await res.json();
+                console.log(data);
 
-        if(data.status === 422 || !data) {
-            window.alert("Invalid Credentials");
-        } else {
-            disatch({ type: "USER", payload: true });     
-            window.alert("Login Successful");
+                alert("Login Successful");
+                
+                storeTokenInLS("token", data.token);
 
-            navigate('/');
+                setUser({ email: "", password: "" });
+                navigate('/');
+            } else {
+                alert("Invalid Credentials"); 
+            }
+        } catch (error) {
+            console.log(error);
         }
+
+        
     }
 
     return (

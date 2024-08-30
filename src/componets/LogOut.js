@@ -1,37 +1,18 @@
-import { useEffect, useContext } from "react";
-import { useNavigate as navigate } from "react-router-dom";
-import { UserContext } from "../App.js";
+import { useEffect } from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../store/auth";
 
 const LogOut = () => {
-    const { disatch } = useContext(UserContext);
-    const api = process.env.BACK_URL;
+
+    const {LogoutUser} = useAuth();
 
     useEffect(() => {
+        LogoutUser ();
 
-        fetch(`${api}/api/logout`, {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json"
-            },
-            credentials: "include"
-        }).then((res)=> {
-                disatch({ type: "USER", payload: false });
-                navigate('/login');
-                if(res.status !== 200){
-                    const error = new Error(res.error);
-                    throw error;
-                }
-            }).catch((err) => {
-                console.log(err);
-            })
-    });
+        
+    }, [LogoutUser]);
 
-    return (
-        <>
-            <h1>Log out page</h1>
-        </>
-    );
+    return <Navigate to='/login'></Navigate>
 };
 
 export default LogOut;

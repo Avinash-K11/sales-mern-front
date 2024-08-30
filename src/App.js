@@ -1,5 +1,5 @@
-import React, { createContext, useReducer } from "react";
-import { Routes, Route } from 'react-router-dom';
+import React from "react";
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import './App.css';
 
@@ -11,8 +11,9 @@ import Contact from "./componets/Contact/Contact.js";
 import About from "./componets/About/About.js";
 import SignUp from './componets/SignUp/SignUp.js';
 import LogIn from './componets/LogIn/LogIn.js';
-import LogOut from './componets/LogOut.js'
-import { reducer, initialState } from './reducer/useReducer.js';
+import LogOut from './componets/LogOut.js';
+
+import { useAuth } from "./store/auth.js";
 
 import Oats from './images/Oats-Milk.jpg';
 import nuttela from './images/Nutella.jpg';
@@ -86,26 +87,22 @@ const productList = [{
 
 ];
 
-export const UserContext = createContext();
-
 const App = () => {
 
+  const { isLoggedIn } = useAuth(); 
 
-  const onAddClicked = () => {
-
-    if(state){
-      return window.alert("Payment window!!");
+  const buyClick = () => {
+    if(isLoggedIn) {
+        alert("Bought Product");
     } else {
-      return window.alert("Login to Buy!!");
+        alert("Login to buy");
+        <Navigate to='/login'></Navigate>
     }
-  };
-
-  const [ state, dispatch ] = useReducer(reducer, initialState);
+  }
 
   return (
 
     <div className="app" >
-      <UserContext.Provider value={{state, dispatch}}>
         <Navbar />
         <Routes>
           <Route path="/" element={
@@ -116,7 +113,7 @@ const App = () => {
                 <ul className="products-row-list">
                   {dealList.map((eachObj)=> 
                     <ProductItem product={eachObj} key={eachObj.id} 
-                    onAddClicked={onAddClicked} />
+                    onAddClicked={buyClick} />
                   )}
                 </ul>
               </div>
@@ -132,7 +129,7 @@ const App = () => {
                 <ul className="products-row-list">
                   {dealList.map((eachObj)=> 
                     <ProductItem product={eachObj} key={eachObj.id} 
-                    onAddClicked={onAddClicked} />
+                    onAddClicked={buyClick} />
                   )}
                 </ul>
               </div>
@@ -174,8 +171,13 @@ const App = () => {
               <><LogOut /></>
           } >             
           </Route>
+
+          <Route path="*" element={
+            <><h1>404 Page Not Found</h1></>
+          } >             
+          </Route>
+
         </Routes>
-        </UserContext.Provider>
     </div>
     
   );
