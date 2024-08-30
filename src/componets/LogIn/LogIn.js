@@ -29,7 +29,7 @@ export default function LogIn() {
 
     const loginUser = async (e) => {
 
-        const url = "http://localhost:4000";
+        const url = "https://sales-mern-back.onrender.com";
         try {
             e.preventDefault();
 

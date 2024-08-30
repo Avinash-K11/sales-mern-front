@@ -10,7 +10,7 @@ export default function SignUp() {
     const navigate = useNavigate();
     const { storeTokenInLS } = useAuth();
 
-    const api = 'http://localhost:4000';
+    const url = 'https://sales-mern-back.onrender.com';
 
     const [ user, setUser ] = useState({
         name: "",
@@ -30,7 +30,7 @@ export default function SignUp() {
     const postData = async (e) => {
         e.preventDefault();
 
-        await fetch(api + '/api/signup', {
+        await fetch(url + '/api/signup', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
