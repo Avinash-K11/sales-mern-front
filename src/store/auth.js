@@ -10,7 +10,7 @@ export const AuthProvider = ({children}) => {
         return localStorage.setItem('token', serverToken);
     };
 
-    const isLoggedIn = !token;
+    const isLoggedIn = token;
 
     const LogoutUser = () => {
         setToken("");
