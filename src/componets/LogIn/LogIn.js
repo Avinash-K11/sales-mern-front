@@ -16,7 +16,6 @@ export default function LogIn() {
     });
 
     const handleInputs = (e) => {
-        console.log(e);
 
         let name = e.target.name;
         let value = e.target.value;
@@ -47,7 +46,7 @@ export default function LogIn() {
                 alert("Login Successful");
                 const token = data.token.value;
                 
-                storeTokenInLS("token", token);
+                storeTokenInLS(token);
 
                 setUser({ email: "", password: "" });
                 navigate('/');
