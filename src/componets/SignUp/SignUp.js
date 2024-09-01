@@ -42,7 +42,7 @@ export default function SignUp() {
                 if(data.status === 422 || !data) {
                     window.alert("Invalid Registration");
                 } else {
-                    storeTokenInLS(data.token);
+                    storeTokenInLS(data.token.value);
                     setUser({ name: "", email: "", password: "", cpassword: "", });
                     window.alert("User Created");
 
