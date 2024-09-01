@@ -16,10 +16,10 @@ export const AuthProvider = ({children}) => {
 
 
     const storeTokenInLS = (serverToken) => {
+        console.log(serverToken);
         setToken(serverToken);
     };
 
-    
     const isLoggedIn = !!token;
 
     const LogoutUser = () => {
