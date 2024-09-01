@@ -44,9 +44,9 @@ export default function LogIn() {
                 const data = await res.json();
 
                 alert("Login Successful");
-                const token = data.token;
+                const token = data.token.value;
                 
-                storeTokenInLS("token", +token);
+                storeTokenInLS(token);
 
                 setUser({ email: "", password: "" });
                 navigate('/');
