@@ -1,31 +1,75 @@
 import './contact.css';
 
+import { useState } from 'react';
+
 const Contact = () => {
+
+    const [ customer, setCustomer ] = useState({
+        name: "",
+        subject: "",
+        email: "",
+        country:"",
+        message: ""
+    });
+
+    const handleInputs = (e) => {
+
+        let name = e.target.name;
+        let value = e.target.value;
+
+        setCustomer({...customer, [name]: value, });
+    }
+
+    const postData = async (e) => {
+        e.preventDefault();
+
+        const apiUrl = 'https://sales-mern-back.onrender.com';
+
+        try {
+          const response = await fetch(apiUrl + '/api/contact', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(customer), 
+          });
+    
+          if (response.ok) {
+            console.log('Data submitted successfully');
+            const data = await response.json();
+            console.log('Response:', data);
+          } else {
+            console.error('Error submitting data');
+          }
+        } catch (error) {
+          console.error('Network error:', error);
+        }
+    }
 
     return(
         <>
+        
+        <h3 className='title'>Contact</h3>
+
         <div className='maintext'>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse, ipsam recusandae quos dignissimos autem ab quo totam aut, quia repellat assumenda corrupti magnam quae distinctio voluptatem accusamus natus eligendi veniam.
         </div>
-    
-        <h3 className='title'>Contact</h3>
 
         <div className='contact-container'>
-            <form >
-                <label for="fname">First Name</label>
-                <input type='text' name='fname' className='content' placeholder='first name' required />
+            <form  onSubmit={postData}>
+                <label htmlFor="name">Full Name</label>
+                <input type='text' name='name' className='content' placeholder='full name' value={customer.name} onChange={handleInputs} required />
 
-                <label for="lname">Last Name</label>
-                <input type='text' name='lname' className='content' placeholder='last name' />
+                <label htmlFor="subject">Subject</label>
+                <input type='subject' name='subject' className='content' placeholder='issue/suggestion' value={customer.subject} onChange={handleInputs} required />
 
-                <label for="subject">Subject</label>
-                <input type='subject' name='subject' className='content' placeholder='issue/suggestion' required />
+                <label htmlFor="email">Email</label>
+                <input type='email' name='email' className='content' placeholder='name@example.com' 
+                value={customer.email} onChange={handleInputs} required />
 
-                <label for="email">Email</label>
-                <input type='email' name='email' className='content' placeholder='name@example.com' required />
-
-                <label for="country">Country</label>
-                <select name="country" id="country" className='content'>
+                <label htmlFor="country">Country</label>
+                <select name="country" id="country" className='content' value={customer.country} onChange={handleInputs} >
+                    <option value="">Select a country</option>
                     <option value="India">India</option>
                     <option value="USA">USA</option>
                     <option value="UK">UK</option>
@@ -33,8 +77,8 @@ const Contact = () => {
                     <option value="Australia">Australia</option>
                 </select>
 
-                <label for="message">Message</label>
-                <textarea name='message' id='message' className='content' cols='30' rows='10' placeholder='issue/suggestion'> </textarea>
+                <label htmlFor="message">Message</label>
+                <textarea name='message' id='message' className='content' cols='30' rows='10' placeholder='issue/suggestion' value={customer.message} onChange={handleInputs}> </textarea>
 
                 <button type="submit" className='submit-btn' >Submit</button>
 

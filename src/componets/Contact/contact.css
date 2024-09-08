@@ -1,13 +1,16 @@
 .contact-container{
     display: flex;
     border-radius: 5px;
-    background-color: #f2f2f2;
+    background-color: white;
     padding: 20px;
-    margin: 10px 0px;
+    margin: 0px 0px;
 }
 
 .contact-container form {
     flex: 1;
+    margin-left: 10px;
+    margin-left: 10px;
+    align-items: center;
 }
 
 .content {
@@ -37,9 +40,11 @@
     background-color: #563434;
 }
 
-.content .map {
+.map {
     padding: 12px;
     margin-left: 20px;
+    margin-right: 10px;
+    border-width: 2px;
     flex: 1;
     border: 0;
 }

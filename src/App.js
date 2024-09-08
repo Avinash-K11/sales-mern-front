@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
 
@@ -12,8 +12,8 @@ import About from "./componets/About/About.js";
 import SignUp from './componets/SignUp/SignUp.js';
 import LogIn from './componets/LogIn/LogIn.js';
 import LogOut from './componets/LogOut.js';
+import Cart from "./componets/Cart/Cart.js";
 
-import { useAuth } from "./store/auth.js";
 
 import Oats from './images/Oats-Milk.jpg';
 import nuttela from './images/Nutella.jpg';
@@ -89,16 +89,6 @@ const productList = [{
 
 const App = () => {
 
-  const { isLoggedIn } = useAuth(); 
-
-  const buyClick = () => {
-    if(isLoggedIn) {
-        alert("Bought Product");
-    } else {
-        alert("Login to buy");
-        <Navigate to='/login'></Navigate>
-    }
-  }
 
   return (
 
@@ -112,12 +102,10 @@ const App = () => {
                 <h2 className="title">Deals Of The Day</h2>
                 <ul className="products-row-list">
                   {dealList.map((eachObj)=> 
-                    <ProductItem product={eachObj} key={eachObj.id} 
-                    onAddClicked={buyClick} />
+                    <ProductItem product={eachObj} key={eachObj.id} />
                   )}
                 </ul>
               </div>
-              <Footer />
             </>
           } >             
           </Route>
@@ -128,8 +116,7 @@ const App = () => {
                 <h2 className="title">Deals Of The Day</h2>
                 <ul className="products-row-list">
                   {dealList.map((eachObj)=> 
-                    <ProductItem product={eachObj} key={eachObj.id} 
-                    onAddClicked={buyClick} />
+                    <ProductItem product={eachObj} key={eachObj.id} />
                   )}
                 </ul>
               </div>
@@ -142,42 +129,29 @@ const App = () => {
                   )}
                 </ul>
               </div>
-              <Footer />
               </>
           } >             
           </Route>
 
-          <Route path="/signup" element={
-              <><SignUp /> <Footer /></>
-          } >     
-          </Route>        
+          <Route path="/signup" element={ <SignUp /> }> </Route>        
 
-          <Route path="/login" element={
-              <><LogIn /> <Footer /></>
-          } >     
-          </Route>     
+          <Route path="/login" element={ <LogIn />} > </Route>     
 
-          <Route path="/about" element={
-              <><About /> <Footer /></>
-          } >             
-          </Route>
+          <Route path="/about" element={ <About />}> </Route>
 
-          <Route path="/contact" element={
-              <><Contact /><Footer /></>
-          } >             
-          </Route>
+          <Route path="/contact" element={ <Contact /> } > </Route>
 
-          <Route path="/logout" element={
-              <><LogOut /></>
-          } >             
-          </Route>
+          <Route path="/logout" element={ <LogOut /> } >  </Route>
+
+          <Route path="/cart" element={ <Cart /> } >  </Route>
 
           <Route path="*" element={
             <><h1>404 Page Not Found</h1></>
           } >             
           </Route>
-
+          
         </Routes>
+        <Footer />
     </div>
     
   );

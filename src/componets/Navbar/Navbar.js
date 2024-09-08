@@ -5,10 +5,11 @@ import { Link, NavLink } from 'react-router-dom';
 
 import { useAuth } from '../../store/auth';
 
-const Navbar = () => {
+const Navbar = (props) => {
 
-        const { isLoggedIn } = useAuth();
-    
+        const { isLoggedIn, cart } = useAuth();
+        const products = Array.isArray(cart.items) ? cart.items : [];
+
         return (
             <nav>
                 <Link to='/'>
@@ -41,10 +42,16 @@ const Navbar = () => {
                             <li  className='nav-links'>
                                 <NavLink to='/login'>Login</NavLink>
                             </li> 
+
+                            
                         </> 
                     }
-                    
-                   
+                    <li className="cart-menu-con">
+                        <NavLink to='/cart'>
+                            Cart <span className="cart-count">{products.length}</span>
+                        </NavLink>
+                    </li>
+
                 </ul>
             </nav>
         );

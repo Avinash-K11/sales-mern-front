@@ -8,7 +8,7 @@ export default function LogIn() {
 
     // const api = process.env.BACK_URL;
     const navigate = useNavigate();
-    const {storeTokenInLS} = useAuth();
+    const { storeTokenInLS, updateUser } = useAuth();
 
     const [ user, setUser ] = useState({
         email: "",
@@ -46,6 +46,7 @@ export default function LogIn() {
                 alert("Login Successful");
                 
                 storeTokenInLS(data.token);
+                updateUser(data.userId);
 
                 setUser({ email: "", password: "" });
                 navigate('/');

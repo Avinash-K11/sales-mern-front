@@ -1,7 +1,15 @@
 import './index.css';
 
+import { useAuth } from '../../store/auth';
+
 const ProductItem = (props) => {
-    const { product, onAddClicked } = props;
+    const { product } = props;
+
+    const { addToCart } = useAuth();
+
+    const onAddClicked = (e) => {
+        addToCart(product);
+    }
 
     return(
         <li className='product-item'>
@@ -10,7 +18,9 @@ const ProductItem = (props) => {
             <h5>{product.brand}</h5>
             <p>₹ {product.price}</p>
             <div className='add-cart-container'>
-                <button className='add-cart-btn' onClick={onAddClicked} type='button'>Buy</button>
+                <button className='add-cart-btn' onClick={onAddClicked} type='button'>
+                    Add to cart
+                </button>
             </div>
         </li>
     );
