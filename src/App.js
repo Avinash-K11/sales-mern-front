@@ -3,10 +3,11 @@ import { Routes, Route } from 'react-router-dom';
 
 import './App.css';
 
+import HomePage from "./pages/HomePage.js";
+import ProductPage from "./pages/ProductPage.js";
+
 import Navbar from "./componets/Navbar/Navbar.js";
-import Banner from "./componets/Banner/Banner.js";
 import Footer from "./componets/Footer/Footer.js";
-import ProductItem from "./componets/ProductItem/ProductItem.js";
 import Contact from "./componets/Contact/Contact.js";
 import About from "./componets/About/About.js";
 import SignUp from './componets/SignUp/SignUp.js';
@@ -95,42 +96,10 @@ const App = () => {
     <div className="app" >
         <Navbar />
         <Routes>
-          <Route path="/" element={
-            <>
-              <Banner />
-              <div className="products-section">
-                <h2 className="title">Deals Of The Day</h2>
-                <ul className="products-row-list">
-                  {dealList.map((eachObj)=> 
-                    <ProductItem product={eachObj} key={eachObj.id} />
-                  )}
-                </ul>
-              </div>
-            </>
-          } >             
+          <Route path="/" element={<HomePage dealList={dealList} />} >             
           </Route>
 
-          <Route path="/products" element={
-              <>
-                <div className="products-section">
-                <h2 className="title">Deals Of The Day</h2>
-                <ul className="products-row-list">
-                  {dealList.map((eachObj)=> 
-                    <ProductItem product={eachObj} key={eachObj.id} />
-                  )}
-                </ul>
-              </div>
-
-              <div className="products-section">
-              <h2 className="title">All Products</h2>
-                <ul className="products-row-list">
-                  {productList.map((eachObj)=> 
-                    <ProductItem product={eachObj} key={eachObj.id} />
-                  )}
-                </ul>
-              </div>
-              </>
-          } >             
+          <Route path="/products" element={<ProductPage dealList={dealList} productList={productList} />} >             
           </Route>
 
           <Route path="/signup" element={ <SignUp /> }> </Route>        

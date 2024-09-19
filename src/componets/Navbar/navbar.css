@@ -4,14 +4,12 @@
 
 nav {
     display: flex;
+    position: sticky;
+    overflow: hidden;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 1%;
-    overflow: hidden;
-    padding-top: 0.5rem;
     background-color: #FFDBBB;
-    position: sticky;
-    top: 0;
+    padding: 1rem;
 }
 
 .logo {
@@ -67,51 +65,60 @@ nav ul.open {
     font-weight: bold;
 }
 
-nav .menu {
+.menu {
     display: none;
     position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
+    top: 1.5rem; 
+    right: 1rem;
     flex-direction: column;
     justify-content: space-between;
-    width: 2.25rem;
+    width: 2.5rem;
     height: 2rem;
+    cursor: pointer;
 }
 
-nav .menu span {
-    height: 0.5rem;
+.menu span {
+    height: 0.3rem;
     width: 100%;
-    background-color: #fff;
+    background-color: #a71d1d;
     border-radius: 0.5rem;
 }
 
+/* Mobile styles */
+
 @media (max-width: 480px) {
-    nav .menu {
+
+    /* Hide the menu initially */
+
+    .menu{
         display: flex;
+        align-items: end;
     }
 
-    nav {
-        padding: 0;
+    .cart-menu-con {
+        margin-right: 3rem;
     }
 
-    nav {
-        flex-direction: column;
-        align-items: start;
-    }
-
-    nav ul, nav .oth {
+    .nav-list {
+        list-style: none;
         display: none;
         flex-direction: column;
-        width: 100%;
-        margin-bottom: 0.5rem;
+        background-color: #FFDBBB;
+        position: absolute;
+        top: 3rem;
+        right: 1rem;
+        padding: 1rem;
+        width: 200px;
+        border-radius: 0.5rem;
     }
 
-    nav ul li {
-        width: 100%;
-        text-align: center;
-    }
-
-    nav ul li a {
-        margin: 0.2rem 0.5rem;
+    /* Display the menu when the class 'open' is added */
+    .nav-list.open {
+        display: flex;
+        position: absolute;
+        align-items: flex-end;
+        right: 0%;
+        margin-top: 2rem;
+        margin-right: 0%;
     }
 }

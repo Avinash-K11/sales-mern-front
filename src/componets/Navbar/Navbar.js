@@ -1,7 +1,10 @@
+import { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
+
 import './navbar.css';
 import logo from '../../images/Premier_Foods-Logo.png';
 
-import { Link, NavLink } from 'react-router-dom';
+
 
 import { useAuth } from '../../store/auth';
 
@@ -9,14 +12,24 @@ const Navbar = (props) => {
 
         const { isLoggedIn, cart } = useAuth();
         const products = Array.isArray(cart.items) ? cart.items : [];
+        const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+        const toggleMenu = () => {
+            setIsMenuOpen(!isMenuOpen);
+        };
 
         return (
             <nav>
                 <Link to='/'>
                     <img className="logo" src={logo} alt="Premier-Foods-Logo"/>
                 </Link>
+                <div className='menu' onClick={toggleMenu}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
 
-                <ul className="open" >
+                <ul className={`nav-list ${isMenuOpen ? 'open' : ''}`}>
                     <li  className='nav-links'>
                         <NavLink to='/'>Home</NavLink>
                     </li>
@@ -46,13 +59,12 @@ const Navbar = (props) => {
                             
                         </> 
                     }
-                    <li className="cart-menu-con">
+                </ul>
+                <div className="cart-menu-con">
                         <NavLink to='/cart'>
                             Cart <span className="cart-count">{products.length}</span>
                         </NavLink>
-                    </li>
-
-                </ul>
+                </div>
             </nav>
         );
 };

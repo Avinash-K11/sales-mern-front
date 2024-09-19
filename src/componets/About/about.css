@@ -1,30 +1,125 @@
-.about-container {
+/* Base styling for the about page */
+.about-page {
+    font-family: 'Arial', sans-serif;
+}
+
+.about-hero {
+    background-image: url('../../images/vegan-food-banner.png');
+    background-size: cover;
+    background-position: center;
+    text-align: center;
+    color: cornflowerblue;
+    padding: 80px 20px;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+}
+
+/* About section */
+.about-section {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    flex-direction: column;
-    align-items: center;
+    padding: 60px 20px;
 }
 
-.content1{
-    flex: 1;
-    display: flexbox;
-    align-items: center;
+.about-content {
+    flex-basis: 50%;
+    padding-right: 20px;
 }
 
-.content2{
-    display: flexbox;
-    align-items: center;
+.about-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
 }
 
-.content img, .content2 img {
-    display: flexbox;
-    width: 30%;   
+.about-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
 }
 
-.content p{
-    margin: 1rem;
+.about-image {
+    flex-basis: 50%;
 }
 
-.content h3 {
-    text-decoration: solid;
+.about-image img {
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+/* Mission section */
+.mission-section {
+    background-color: #f4f4f4;
+    padding: 60px 20px;
+    text-align: center;
+}
+
+.mission-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.mission-content p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    margin: 0 auto;
+    max-width: 800px;
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .about-section {
+        flex-direction: column;
+        padding: 40px 20px;
+    }
+
+    .about-content, .about-image {
+        flex-basis: 100%;
+        padding: 0;
+    }
+
+    .about-content {
+        padding-bottom: 20px;
+        text-align: center;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+
+    .hero-content p {
+        font-size: 1.2rem;
+    }
+
+    .about-content h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .about-section, .mission-section {
+        padding: 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .about-content p, .mission-content p {
+        font-size: 1rem;
+    }
+
+    .about-content h2, .mission-content h2 {
+        font-size: 1.8rem;
+    }
 }
